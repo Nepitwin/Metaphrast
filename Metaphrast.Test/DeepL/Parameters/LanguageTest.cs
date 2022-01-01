@@ -1,20 +1,36 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Metaphrast.DeepL;
 using Xunit;
 
-namespace Metaphrast.Test.DeepL;
+namespace Metaphrast.Test.DeepL.Parameters;
 public class LanguageTest
 {
     [Theory, MemberData(nameof(Languages))]
-    public void LanguageCodeImplicitStringCastTest(string language, string expectedCode)
+    public void LanguageImplicitStringCastTest(string language, string expectedCode)
     {
         Assert.Equal(expectedCode, language);
     }
 
     [Theory, MemberData(nameof(Languages))]
-    public void LanguageCodeToStringTest(Language language, string expectedCode)
+    public void LanguageToStringTest(Language language, string expectedCode)
     {
         Assert.Equal(expectedCode, language);
+    }
+
+    [Theory, MemberData(nameof(Languages))]
+    public void StringToLanguageTest(Language expectedLanguage, string code)
+    {
+        Assert.Equal(code, expectedLanguage);
+    }
+
+    [Fact]
+    public void UnsupportedStringToLanguageTest()
+    {
+        Assert.Throws<NotSupportedException>(() =>
+        {
+            Language lang = "NOT_SUPPORTED";
+        } );
     }
 
     public static IEnumerable<object[]> Languages =>

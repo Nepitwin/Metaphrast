@@ -1,5 +1,4 @@
-﻿using Metaphrast.DeepL;
-using Metaphrast.Translation;
+﻿using Metaphrast.Translation;
 
 namespace Metaphrast;
 
@@ -16,7 +15,7 @@ public class API : IDisposable
         _apiKey = apiKey;
     }
 
-    public void Translate(Language sourceGlossaryLanguage, List<Glossary> glossaries)
+    public void Translate(List<TranslationBook> translationBooks)
     {
         throw new NotImplementedException();
     }
