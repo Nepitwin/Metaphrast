@@ -2,6 +2,15 @@
 using Metaphrast.DeepL;
 using Metaphrast.Translation;
 
+// ToDo := Implementation from Program
+// By default load config.json
+// Contains information about source translation file
+// API Token
+// Selected language translations
+// Verify configuration
+// Call Deepl-API
+// Store all glossary translations + hashes in corresponding json files
+
 // Create source glossary for all corresponding translations
 var glossaryEn = new Glossary(Language.English);
 glossaryEn.Texts.Add("Holland", "Holland");
