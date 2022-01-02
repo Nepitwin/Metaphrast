@@ -14,7 +14,7 @@ public class TranslationBookTest
         List<string> translationKeys, 
         List<string> translationValues,
         Dictionary<string, string> translationDictionary,
-        List<string> expectedTranslations)
+        Dictionary<string, string> expectedTranslations)
     {
         var glossary = new Glossary(Language.English);
         for(var i = 0; i < sourceKeys.Count; i++)
@@ -32,7 +32,12 @@ public class TranslationBookTest
         }
 
         var translationBook = new TranslationBook(glossary, translationGlossary, translationDictionary);
-        Assert.Equal(expectedTranslations, translationBook.GetTranslations());
+        var actualTranslations = translationBook.GetTranslations();
+        foreach (var translation in expectedTranslations)
+        {
+            Assert.Equal(actualTranslations[translation.Key], translation.Value);
+        }
+        
     }
 
     [Fact]
@@ -67,7 +72,13 @@ public class TranslationBookTest
                 new List<string>(),
                 new List<string>(), 
                 new Dictionary<string, string>(),
-                new List<string>{"Holland", "England", "Italy", "Spain"}
+                new Dictionary<string, string>                
+                {
+                    {"Netherland", "Holland" },
+                    {"England", "England" },
+                    {"Italy", "Italy" },
+                    {"Spain", "Spain" },
+                }
             },
             new object[]
             {
@@ -76,7 +87,13 @@ public class TranslationBookTest
                 new List<string>{"Netherland"},
                 new List<string>{"Niederlande"},
                 new Dictionary<string, string>(),
-                new List<string>{"Holland", "England", "Italy", "Spain"}
+                new Dictionary<string, string>
+                {
+                    {"Netherland", "Holland" },
+                    {"England", "England" },
+                    {"Italy", "Italy" },
+                    {"Spain", "Spain" },
+                }
             },
             new object[]
             {
@@ -88,7 +105,13 @@ public class TranslationBookTest
                 {
                     {"Netherland", "5a9cf672c8be6b5ab9546a2fb49b06dd81a4e364c86ed023898c49d9bb0605dc" }
                 },
-                new List<string>{"Holland", "England", "Italy", "Spain"}
+                new Dictionary<string, string>
+                {
+                    {"Netherland", "Holland" },
+                    {"England", "England" },
+                    {"Italy", "Italy" },
+                    {"Spain", "Spain" },
+                }
             },
             new object[]
             {
@@ -104,7 +127,11 @@ public class TranslationBookTest
                     {"Spain", "8ef41e6f4b07432a0cb4eb7a8774e7a3878fd3e385f49aa09b406768467db228" },
 
                 },
-                new List<string>{"England", "Spain"}
+                new Dictionary<string, string>
+                {
+                    {"England", "England" },
+                    {"Spain", "Spain" },
+                }
             },
         };
 }

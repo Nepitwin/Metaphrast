@@ -4,33 +4,34 @@ namespace Metaphrast.Translation;
 public class TranslationBook
 {
     private readonly Glossary _sourceGlossary;
-    private readonly Glossary _targetGlossary;
+    // ToDo Redesign
+    public Glossary TargetGlossary { get; }
     // Stores all key hashes from translated target book by XOR operation
     public Dictionary<string, string> Hashes { get; }
 
     public TranslationBook(Glossary sourceGlossary, Glossary targetGlossary, Dictionary<string, string> hashes)
     {
         _sourceGlossary = sourceGlossary;
-        _targetGlossary = targetGlossary;
+        TargetGlossary = targetGlossary;
         Hashes = hashes;
     }
 
-    public IList<string> GetTranslations()
+    public Dictionary<string, string> GetTranslations()
     {
-        var list = new List<string>();
+        var list = new Dictionary<string, string>();
 
         foreach (var (key, value) in _sourceGlossary.Texts)
         {
-            if (_targetGlossary.Texts.ContainsKey(key))
+            if (TargetGlossary.Texts.ContainsKey(key))
             {
-                if (!Hashes.ContainsKey(key) || IsHashModified(value, _targetGlossary.Texts[key], key))
+                if (!Hashes.ContainsKey(key) || IsHashModified(value, TargetGlossary.Texts[key], key))
                 {
-                    list.Add(value);
+                    list[key] = value;
                 }
             }
             else
             {
-                list.Add(value);
+                list[key] = value;
             }
         }
 
@@ -44,7 +45,7 @@ public class TranslationBook
             throw new KeyNotFoundException();
         }
 
-        _targetGlossary.Texts[key] = value;
+        TargetGlossary.Texts[key] = value;
         Hashes[key] = CalculateHash(value, _sourceGlossary.Texts[key]);
     }
 

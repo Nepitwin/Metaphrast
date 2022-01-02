@@ -26,6 +26,5 @@ namespace Metaphrast.IO
         {
             File.WriteAllText(path, JsonConvert.SerializeObject(entity));
         }
-
     }
 }
