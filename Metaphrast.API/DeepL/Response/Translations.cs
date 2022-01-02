@@ -21,7 +21,7 @@
  */
 public sealed class Translations
 {
-    public IList<Text> translations { get; set; }
+    public IList<Text> translations { get; set; } = new List<Text>();
 
     public sealed class Text
     {

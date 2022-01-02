@@ -7,7 +7,7 @@ namespace Metaphrast.Test.Translation;
 
 public class TranslationBookTest
 {
-    [Theory, MemberData(nameof(Languages))]
+    [Theory, MemberData(nameof(TranslationBooks))]
     public void GetTranslationListTest(
         List<string> sourceKeys, 
         List<string> sourceValues, 
@@ -35,7 +35,7 @@ public class TranslationBookTest
         Assert.Equal(expectedTranslations, translationBook.GetTranslationList());
     }
 
-    public static IEnumerable<object[]> Languages =>
+    public static IEnumerable<object[]> TranslationBooks =>
         new List<object[]>
         {
             new object[] 
