@@ -6,6 +6,7 @@ namespace Metaphrast.Test.Crypto;
 public class AlgorithmTest
 {
     [Theory]
+    [InlineData("Niederlande", "Netherland", "00f181027313ba02cc0e237709f664674842306c21404263fd71ffab49d00d18")]
     [InlineData("Italy", "Italien", "b8a549e43270dccdaaa7024e76d3898be28afa6ece57ccd1bdb1040eb1d7763e")]
     [InlineData("Italien", "Italy", "b8a549e43270dccdaaa7024e76d3898be28afa6ece57ccd1bdb1040eb1d7763e")]
     [InlineData("Italy", "Italy", "0000000000000000000000000000000000000000000000000000000000000000")]
@@ -25,6 +26,8 @@ public class AlgorithmTest
     [Theory]
     [InlineData("45f16144c18cb09894ec3e2410e50711f7edcd915b80bf7c7151701dda0ee98a")]
     [InlineData("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")]
+    [InlineData("00f181027313ba02cc0e237709f664674842306c21404263fd71ffab49d00d18")]
+    [InlineData("0000000000000000000000000000000000000000000000000000000000000000")]
     public void Sha256HashTest(string sha256)
     {
         Assert.Equal(sha256, Algorithm.Sha256ToString(Algorithm.Sha256StringToByteArray(sha256)));

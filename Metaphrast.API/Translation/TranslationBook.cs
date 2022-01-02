@@ -6,16 +6,16 @@ public class TranslationBook
     private readonly Glossary _sourceGlossary;
     private readonly Glossary _targetGlossary;
     // Stores all key hashes from translated target book by XOR operation
-    private readonly Dictionary<string, string> _hashes;
+    public Dictionary<string, string> Hashes { get; }
 
     public TranslationBook(Glossary sourceGlossary, Glossary targetGlossary, Dictionary<string, string> hashes)
     {
         _sourceGlossary = sourceGlossary;
         _targetGlossary = targetGlossary;
-        _hashes = hashes;
+        Hashes = hashes;
     }
 
-    public IList<string> GetTranslationList()
+    public IList<string> GetTranslations()
     {
         var list = new List<string>();
 
@@ -23,7 +23,7 @@ public class TranslationBook
         {
             if (_targetGlossary.Texts.ContainsKey(key))
             {
-                if (IsHashModified(value, _targetGlossary.Texts[key], key))
+                if (!Hashes.ContainsKey(key) || IsHashModified(value, _targetGlossary.Texts[key], key))
                 {
                     list.Add(value);
                 }
@@ -37,15 +37,20 @@ public class TranslationBook
         return list;
     }
 
-    public void AddTranslation(string key, string value)
+    public void SetTranslation(string key, string value)
     {
+        if (!_sourceGlossary.Texts.ContainsKey(key))
+        {
+            throw new KeyNotFoundException();
+        }
+
         _targetGlossary.Texts[key] = value;
-        _hashes[key] = CalculateHash(value, _sourceGlossary.Texts[key]);
+        Hashes[key] = CalculateHash(value, _sourceGlossary.Texts[key]);
     }
 
     private bool IsHashModified(string inputA, string inputB, string key)
     {
-        return !_hashes.ContainsKey(key) || CalculateHash(inputA, inputB) != _hashes[key];
+        return CalculateHash(inputA, inputB) != Hashes[key];
     }
 
     private static string CalculateHash(string inputA, string inputB)

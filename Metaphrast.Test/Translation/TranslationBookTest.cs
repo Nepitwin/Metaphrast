@@ -7,8 +7,8 @@ namespace Metaphrast.Test.Translation;
 
 public class TranslationBookTest
 {
-    [Theory, MemberData(nameof(TranslationBooks))]
-    public void GetTranslationListTest(
+    [Theory, MemberData(nameof(TranslationBookData))]
+    public void GetTranslationsTest(
         List<string> sourceKeys, 
         List<string> sourceValues, 
         List<string> translationKeys, 
@@ -32,10 +32,32 @@ public class TranslationBookTest
         }
 
         var translationBook = new TranslationBook(glossary, translationGlossary, translationDictionary);
-        Assert.Equal(expectedTranslations, translationBook.GetTranslationList());
+        Assert.Equal(expectedTranslations, translationBook.GetTranslations());
     }
 
-    public static IEnumerable<object[]> TranslationBooks =>
+    [Fact]
+    public void SetHashTest()
+    {
+        var sourceGlossary = new Glossary(Language.English);
+        sourceGlossary.Texts.Add("Netherland", "Netherland");
+        var translationGlossary = new Glossary(Language.German);
+        var translationBook = new TranslationBook(sourceGlossary, translationGlossary, new Dictionary<string, string>());
+
+        translationBook.SetTranslation("Netherland", "Niederlande");
+        Assert.True(translationBook.Hashes.ContainsKey("Netherland"));
+        Assert.Equal("00f181027313ba02cc0e237709f664674842306c21404263fd71ffab49d00d18", translationBook.Hashes["Netherland"]);
+    }
+
+    [Fact]
+    public void InvalidSetHashTest()
+    {
+        var sourceGlossary = new Glossary(Language.English);
+        var translationGlossary = new Glossary(Language.German);
+        var translationBook = new TranslationBook(sourceGlossary, translationGlossary, new Dictionary<string, string>());
+        Assert.Throws<KeyNotFoundException>(() => translationBook.SetTranslation("Netherland", "Niederlande"));
+    }
+
+    public static IEnumerable<object[]> TranslationBookData =>
         new List<object[]>
         {
             new object[] 
