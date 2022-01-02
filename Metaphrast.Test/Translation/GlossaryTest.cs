@@ -8,11 +8,11 @@ namespace Metaphrast.Test.Translation;
 public class GlossaryTest
 {
     [Theory, MemberData(nameof(GlossaryData))]
-    public void JsonTest(Glossary glossary, Dictionary<string, string> texts, string expectedJson)
+    public void JsonTest(object glossary, Dictionary<string, string> texts, string expectedJson)
     {
         foreach (var (key, value) in texts)
         {
-            glossary.Texts.Add(key, value);
+            ((Glossary)glossary).Texts.Add(key, value);
         }
 
         Assert.Equal(expectedJson, JsonConvert.SerializeObject(glossary));

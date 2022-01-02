@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Metaphrast.Crypto;
 
-public class Algorithm
+internal class Algorithm
 {
     private const int Sha256ByteSize = 32;
 

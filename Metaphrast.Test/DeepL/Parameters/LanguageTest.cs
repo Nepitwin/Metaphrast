@@ -13,15 +13,15 @@ public class LanguageTest
     }
 
     [Theory, MemberData(nameof(Languages))]
-    public void LanguageToStringTest(Language language, string expectedCode)
+    public void LanguageToStringTest(object language, string expectedCode)
     {
-        Assert.Equal(expectedCode, language);
+        Assert.Equal(expectedCode, (Language)language);
     }
 
     [Theory, MemberData(nameof(Languages))]
-    public void StringToLanguageTest(Language expectedLanguage, string code)
+    public void StringToLanguageTest(object expectedLanguage, string code)
     {
-        Assert.Equal(code, expectedLanguage);
+        Assert.Equal(code, (Language)expectedLanguage);
     }
 
     [Fact]

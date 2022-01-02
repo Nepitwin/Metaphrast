@@ -1,7 +1,7 @@
 ﻿using Metaphrast.DeepL;
 
 namespace Metaphrast.Translation;
-public class Glossary
+internal class Glossary
 {
     public string Language { get; }
 

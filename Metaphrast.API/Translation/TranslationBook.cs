@@ -1,9 +1,10 @@
 ﻿using Metaphrast.Crypto;
 
 namespace Metaphrast.Translation;
-public class TranslationBook
+internal class TranslationBook
 {
     private readonly Glossary _sourceGlossary;
+
     // ToDo Redesign
     public Glossary TargetGlossary { get; }
     // Stores all key hashes from translated target book by XOR operation

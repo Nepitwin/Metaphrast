@@ -4,7 +4,7 @@
  * DeepL argument implementation by specific text translations from source_lang or target_lang.
  * https://www.deepl.com/de/docs-api/translating-text
  */
-public sealed class Language
+internal class Language
 {
     public static implicit operator string(Language language) => language.ToString();
 

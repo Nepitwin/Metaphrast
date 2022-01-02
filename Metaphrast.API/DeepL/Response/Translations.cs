@@ -19,11 +19,11 @@
  *  ]
  * }
  */
-public sealed class Translations
+internal class Translations
 {
     public IList<Text> translations { get; set; } = new List<Text>();
 
-    public sealed class Text
+    internal class Text
     {
         public string detected_source_language { get; set; }
         public string text { get; set; }

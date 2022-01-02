@@ -1,30 +1,28 @@
 ﻿using System.Text.Json.Nodes;
 using Newtonsoft.Json;
 
-namespace Metaphrast.IO
+namespace Metaphrast.IO;
+internal class Json<T>
 {
-    internal class Json<T>
+    public static T Load(string path)
     {
-        public static T Load(string path)
+        var json = JsonNode.Parse(File.ReadAllText(path));
+        if (json == null)
         {
-            var json = JsonNode.Parse(File.ReadAllText(path));
-            if (json == null)
-            {
-                throw new Exception();
-            }
-
-            var jsonObject = JsonConvert.DeserializeObject<T>(json.ToJsonString());
-            if (jsonObject == null)
-            {
-                throw new Exception();
-            }
-
-            return jsonObject;
+            throw new Exception();
         }
 
-        public static void Save(T entity, string path)
+        var jsonObject = JsonConvert.DeserializeObject<T>(json.ToJsonString());
+        if (jsonObject == null)
         {
-            File.WriteAllText(path, JsonConvert.SerializeObject(entity));
+            throw new Exception();
         }
+
+        return jsonObject;
+    }
+
+    public static void Save(T entity, string path)
+    {
+        File.WriteAllText(path, JsonConvert.SerializeObject(entity));
     }
 }
