@@ -37,9 +37,9 @@ internal class Api
             foreach (var list in splitLists)
             {
                 var resultHttpRequest = SendHttpRequest(book.SourceGlossary.Language, book.TargetGlossary.Language, list);
-                var translationsResult = JsonConvert.DeserializeObject<Translations>(resultHttpRequest.Result);
+                var translationsResult = JsonConvert.DeserializeObject<TranslationsResponse>(resultHttpRequest.Result);
 
-                var translations = translationsResult?.translations;
+                var translations = translationsResult?.Translations;
                 if (translations == null)
                 {
                     continue;
@@ -48,7 +48,7 @@ internal class Api
                 var i = 0;
                 foreach (var translation in translationList)
                 {
-                    book.SetTranslation(translation.Key, translations[i].text);
+                    book.SetTranslation(translation.Key, translations[i].Text);
                     i++;
                 }
             }

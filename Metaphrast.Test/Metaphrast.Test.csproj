@@ -25,8 +25,4 @@
     <ProjectReference Include="..\Metaphrast.API\Metaphrast.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DeepL\Response\" />
-  </ItemGroup>
-
 </Project>

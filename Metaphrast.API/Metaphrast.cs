@@ -12,10 +12,10 @@ public class Metaphrast
     public Metaphrast(string configFile)
     {
         _config = Json<Config>.Load(configFile);
-        var sourceGlossary = Json<Glossary>.Load(_config.source_translation_file);
+        var sourceGlossary = Json<Glossary>.Load(_config.SourceTranslationFile);
 
-        var filename = Path.GetFileNameWithoutExtension(_config.source_translation_file);
-        foreach (var translationLanguage in _config.translation_languages)
+        var filename = Path.GetFileNameWithoutExtension(_config.SourceTranslationFile);
+        foreach (var translationLanguage in _config.TranslationLanguages)
         {
             // ToDo Redesign
             var targetGlossaryFile = filename + "_" + translationLanguage + ".json";
@@ -25,7 +25,7 @@ public class Metaphrast
             _books.Add(new TranslationBook(sourceGlossary, targetGlossary, hashDictionary));
         }
 
-        _api = new Api(_config.api_key, true);
+        _api = new Api(_config.ApiKey, true);
     }
 
     public void Translate()
@@ -35,7 +35,7 @@ public class Metaphrast
 
     public void Save()
     {
-        var filename = Path.GetFileNameWithoutExtension(_config.source_translation_file);
+        var filename = Path.GetFileNameWithoutExtension(_config.SourceTranslationFile);
         foreach (var book in _books)
         {
             // ToDo Redesign

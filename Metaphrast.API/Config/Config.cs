@@ -1,12 +1,15 @@
 ﻿using Metaphrast.DeepL;
+using Newtonsoft.Json;
 
 namespace Metaphrast.Console.Config;
 internal class Config
 {
-    public string api_key { get; set; }
-    public string source_translation_file { get; set; }
-
-    public bool is_free_account { get; set; } = true;
-
-    public IList<Language> translation_languages = new List<Language>();
+    [JsonProperty(PropertyName = "api_key")]
+    public string ApiKey { get; set; } = "";
+    [JsonProperty(PropertyName = "source_translation_file")]
+    public string SourceTranslationFile { get; set; } = "";
+    [JsonProperty(PropertyName = "is_free_account")]
+    public bool IsFreeAccount { get; set; } = true;
+    [JsonProperty(PropertyName = "translation_languages")]
+    public IList<Language> TranslationLanguages = new List<Language>();
 }

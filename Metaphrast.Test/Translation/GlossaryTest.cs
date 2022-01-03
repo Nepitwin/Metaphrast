@@ -7,29 +7,29 @@ using Xunit;
 namespace Metaphrast.Test.Translation;
 public class GlossaryTest
 {
-    [Theory, MemberData(nameof(GlossaryData))]
-    public void JsonTest(object glossary, Dictionary<string, string> texts, string expectedJson)
+
+    [Theory, MemberData(nameof(TestData))]
+    public void JsonTest(Dictionary<string, string> texts, string expectedJson)
     {
+        var glossary = new Glossary(Language.Polish);
         foreach (var (key, value) in texts)
         {
-            ((Glossary)glossary).Texts.Add(key, value);
+            glossary.Texts.Add(key, value);
         }
 
         Assert.Equal(expectedJson, JsonConvert.SerializeObject(glossary));
     }
 
-    public static IEnumerable<object[]> GlossaryData =>
+    public static IEnumerable<object[]> TestData =>
         new List<object[]>
         {
             new object[]
             {
-                new Glossary(Language.Polish),
                 new Dictionary<string, string>(),
                 @"{""Language"":""PL"",""Texts"":{}}"
             },
             new object[]
             {
-                new Glossary(Language.Polish),
                 new Dictionary<string, string>{{"Hello", "World"}, {"Key", "Value"}},
                 @"{""Language"":""PL"",""Texts"":{""Hello"":""World"",""Key"":""Value""}}"
             },

@@ -10,7 +10,6 @@ internal class Language
 
     public static implicit operator Language(string language) => ConvertFromString(language);
     
-
     public override string ToString()
     {
         return _language;
