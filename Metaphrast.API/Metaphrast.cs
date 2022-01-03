@@ -7,7 +7,7 @@ public class Metaphrast
 {
     private readonly Config _config;
     private readonly List<TranslationBook> _books = new();
-    private readonly API _api;
+    private readonly Api _api;
 
     public Metaphrast(string configFile)
     {
@@ -25,7 +25,7 @@ public class Metaphrast
             _books.Add(new TranslationBook(sourceGlossary, targetGlossary, hashDictionary));
         }
 
-        _api = new API(_config.api_key, true);
+        _api = new Api(_config.api_key, true);
     }
 
     public void Translate()
