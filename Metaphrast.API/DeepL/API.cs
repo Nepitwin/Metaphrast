@@ -13,10 +13,12 @@ namespace Metaphrast;
 internal class API
 {
     private readonly string _apiKey;
- 
-    public API(string apiKey)
+    private readonly string _apiUrl;
+
+    public API(string apiKey, bool isFreeAccount)
     {
         _apiKey = apiKey;
+        _apiUrl = isFreeAccount ? "https://api-free.deepl.com/v2/translate" : "https://api.deepl.com/v2/translate";
     }
 
     public void Translate(List<TranslationBook> translationBooks)
@@ -49,8 +51,7 @@ internal class API
     
     private Task<string> SendHttpRequest(Language sourceLanguage, Language targetLanguage, IList<string> translationTexts)
     {
-        return "https://api-free.deepl.com/v2/translate"
-            .SetQueryParam("text", translationTexts)
+        return _apiUrl.SetQueryParam("text", translationTexts)
             .PostUrlEncodedAsync(new { target_lang = targetLanguage, source_lang = sourceLanguage, auth_key = _apiKey })
             .ReceiveString();
     }

@@ -1,6 +1,7 @@
 {
-  "api" : "DEEP_API_KEY",
-  "source" : "translation.json",
-  "languages" : ["DE", "FR", "IT"]
+  "api_key" : "DEEP_API_KEY",
+  "is_free_account" : true,
+  "source_translation_file" : "translation.json",
+  "translation_languages" : ["DE", "FR", "IT"]
 }
 
