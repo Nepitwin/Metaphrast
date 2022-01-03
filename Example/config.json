@@ -1,0 +1,6 @@
+{
+  "api" : "DEEP_API_KEY",
+  "source" : "translation.json",
+  "languages" : ["DE", "FR", "IT"]
+}
+

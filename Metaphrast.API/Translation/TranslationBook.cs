@@ -3,8 +3,7 @@
 namespace Metaphrast.Translation;
 internal class TranslationBook
 {
-    private readonly Glossary _sourceGlossary;
-
+    public Glossary SourceGlossary { get; }
     // ToDo Redesign
     public Glossary TargetGlossary { get; }
     // Stores all key hashes from translated target book by XOR operation
@@ -12,7 +11,7 @@ internal class TranslationBook
 
     public TranslationBook(Glossary sourceGlossary, Glossary targetGlossary, Dictionary<string, string> hashes)
     {
-        _sourceGlossary = sourceGlossary;
+        SourceGlossary = sourceGlossary;
         TargetGlossary = targetGlossary;
         Hashes = hashes;
     }
@@ -21,7 +20,7 @@ internal class TranslationBook
     {
         var list = new Dictionary<string, string>();
 
-        foreach (var (key, value) in _sourceGlossary.Texts)
+        foreach (var (key, value) in SourceGlossary.Texts)
         {
             if (TargetGlossary.Texts.ContainsKey(key))
             {
@@ -41,13 +40,13 @@ internal class TranslationBook
 
     public void SetTranslation(string key, string value)
     {
-        if (!_sourceGlossary.Texts.ContainsKey(key))
+        if (!SourceGlossary.Texts.ContainsKey(key))
         {
             throw new KeyNotFoundException();
         }
 
         TargetGlossary.Texts[key] = value;
-        Hashes[key] = CalculateHash(value, _sourceGlossary.Texts[key]);
+        Hashes[key] = CalculateHash(value, SourceGlossary.Texts[key]);
     }
 
     private bool IsHashModified(string inputA, string inputB, string key)
