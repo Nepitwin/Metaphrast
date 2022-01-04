@@ -1,5 +1,5 @@
 {
-  "api_key" : "DEEP_API_KEY",
+  "api_key" : "DEEPL_API_KEY",
   "is_free_account" : true,
   "source_translation_file" : "translation.json",
   "translation_languages" : ["DE", "FR", "IT"]

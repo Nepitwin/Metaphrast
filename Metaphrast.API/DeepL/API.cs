@@ -27,30 +27,32 @@ internal class Api
     {
         foreach (var book in translationBooks)
         {
-            var translationList = book.GetTranslations();
-            if (translationList.Count <= 0)
+            var translationDict = book.GetTranslations();
+            if (translationDict.Count <= 0)
             {
                 continue;
             }
 
-            var splitLists = ListHelper.Split(new List<string>(translationList.Values), MaximumTextsInRequest);
-            foreach (var list in splitLists)
+            var translationsResults = new List<IList<TranslationsResponse.TextValue>>();
+            var splitValuesList = ListHelper.Split(new List<string>(translationDict.Values), MaximumTextsInRequest);
+            var keyValuesList = ListHelper.Split(new List<string>(translationDict.Values), MaximumTextsInRequest);
+
+            foreach (var list in splitValuesList)
             {
                 var resultHttpRequest = SendHttpRequest(book.SourceGlossary.Language, book.TargetGlossary.Language, list);
-                var translationsResult = JsonConvert.DeserializeObject<TranslationsResponse>(resultHttpRequest.Result);
+                var translationResponse = JsonConvert.DeserializeObject<TranslationsResponse>(resultHttpRequest.Result);
+                translationsResults.Add(translationResponse?.Translations);
+            }
 
-                var translations = translationsResult?.Translations;
-                if (translations == null)
+            var z = 0;
+            foreach (var translationResult in translationsResults)
+            {
+                for (var i = 0; i < translationResult.Count; i++)
                 {
-                    continue;
+                    book.SetTranslation(keyValuesList[z][i], translationResult[i].Text);
                 }
 
-                var i = 0;
-                foreach (var translation in translationList)
-                {
-                    book.SetTranslation(translation.Key, translations[i].Text);
-                    i++;
-                }
+                z++;
             }
         }
     }
