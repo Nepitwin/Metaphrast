@@ -1,11 +1,11 @@
-﻿using Metaphrast.DeepL;
+﻿using Metaphrast.DeepL.Parameters;
 using Newtonsoft.Json;
 
-namespace Metaphrast.Console.Config;
+namespace Metaphrast.Config;
 internal class Config
 {
     [JsonProperty(PropertyName = "api_key")]
-    public string ApiKey { get; set; } = "";
+    public string Key { get; set; } = "";
     [JsonProperty(PropertyName = "source_translation_file")]
     public string SourceTranslationFile { get; set; } = "";
     [JsonProperty(PropertyName = "is_free_account")]

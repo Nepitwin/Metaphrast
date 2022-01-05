@@ -1,4 +1,4 @@
-﻿namespace Metaphrast.DeepL;
+﻿namespace Metaphrast.DeepL.Parameters;
 
 /**
  * DeepL argument implementation by specific text translations from source_lang or target_lang.
@@ -20,103 +20,101 @@ internal class Language
         language = language.ToUpper();
         return language switch
         {
-            ApiCodeBulgarian => Bulgarian,
-            ApiCodeCzech => Czech,
-            ApiCodeDanish => Danish,
-            ApiCodeGerman => German,
-            ApiCodeGreek => Greek,
-            ApiCodeEnglishBritish => EnglishBritish,
-            ApiCodeEnglishAmerican => EnglishAmerican,
-            ApiCodeEnglish => English,
-            ApiCodeSpanish => Spanish,
-            ApiCodeEstonian => Estonian,
-            ApiCodeFinnish => Finnish,
-            ApiCodeFrench => French,
-            ApiCodHungarian => Hungarian,
-            ApiCodeItalian => Italian,
-            ApiCodeJapanese => Japanese,
-            ApiCodeLithuanian => Lithuanian,
-            ApiCodeLatvian => Latvian,
-            ApiCodeDutch => Dutch,
-            ApiCodePolish => Polish,
-            ApiCodPortuguesePortugal => PortuguesePortugal,
-            ApiCodePortugueseBrazil => PortugueseBrazil,
-            ApiCodePortuguese => Portuguese,
-            ApiCodeRomanian => Romanian,
-            ApiCodeRussian => Russian,
-            ApiCodeSlovak => Slovak,
-            ApiCodeSlovenian => Slovenian,
-            ApiCodeSwedish => Swedish,
-            ApiCodeChinese => Chinese,
+            CodeBulgarian => Bulgarian,
+            CodeCzech => Czech,
+            CodeDanish => Danish,
+            CodeGerman => German,
+            CodeGreek => Greek,
+            CodeEnglishBritish => EnglishBritish,
+            CodeEnglishAmerican => EnglishAmerican,
+            CodeEnglish => English,
+            CodeSpanish => Spanish,
+            CodeEstonian => Estonian,
+            CodeFinnish => Finnish,
+            CodeFrench => French,
+            CodHungarian => Hungarian,
+            CodeItalian => Italian,
+            CodeJapanese => Japanese,
+            CodeLithuanian => Lithuanian,
+            CodeLatvian => Latvian,
+            CodeDutch => Dutch,
+            CodePolish => Polish,
+            CodPortuguesePortugal => PortuguesePortugal,
+            CodePortugueseBrazil => PortugueseBrazil,
+            CodePortuguese => Portuguese,
+            CodeRomanian => Romanian,
+            CodeRussian => Russian,
+            CodeSlovak => Slovak,
+            CodeSlovenian => Slovenian,
+            CodeSwedish => Swedish,
+            CodeChinese => Chinese,
             _ => throw new NotSupportedException("Language translation not supported"),
         };
     }
 
-#pragma warning disable CA2211
-    private const string ApiCodeBulgarian = "BG";
-    private const string ApiCodeCzech = "CS";
-    private const string ApiCodeDanish = "DA";
-    private const string ApiCodeGerman = "DE";
-    private const string ApiCodeGreek = "EL";
-    private const string ApiCodeEnglishBritish = "EN-GB";
-    private const string ApiCodeEnglishAmerican = "EN-US";
-    private const string ApiCodeEnglish = "EN";
-    private const string ApiCodeSpanish = "ES";
-    private const string ApiCodeEstonian = "ET";
-    private const string ApiCodeFinnish = "FI";
-    private const string ApiCodeFrench = "FR";
-    private const string ApiCodHungarian = "HU";
-    private const string ApiCodeItalian = "IT";
-    private const string ApiCodeJapanese = "JA";
-    private const string ApiCodeLithuanian = "LT";
-    private const string ApiCodeLatvian = "LV";
-    private const string ApiCodeDutch = "NL";
-    private const string ApiCodePolish = "PL";
-    private const string ApiCodPortuguesePortugal = "PT-PT";
-    private const string ApiCodePortugueseBrazil = "PT-BR";
-    private const string ApiCodePortuguese = "PT";
-    private const string ApiCodeRomanian = "RO";
-    private const string ApiCodeRussian = "RU";
-    private const string ApiCodeSlovak = "SK";
-    private const string ApiCodeSlovenian = "SL";
-    private const string ApiCodeSwedish = "SV";
-    private const string ApiCodeChinese = "ZH";
+    private const string CodeBulgarian = "BG";
+    private const string CodeCzech = "CS";
+    private const string CodeDanish = "DA";
+    private const string CodeGerman = "DE";
+    private const string CodeGreek = "EL";
+    private const string CodeEnglishBritish = "EN-GB";
+    private const string CodeEnglishAmerican = "EN-US";
+    private const string CodeEnglish = "EN";
+    private const string CodeSpanish = "ES";
+    private const string CodeEstonian = "ET";
+    private const string CodeFinnish = "FI";
+    private const string CodeFrench = "FR";
+    private const string CodHungarian = "HU";
+    private const string CodeItalian = "IT";
+    private const string CodeJapanese = "JA";
+    private const string CodeLithuanian = "LT";
+    private const string CodeLatvian = "LV";
+    private const string CodeDutch = "NL";
+    private const string CodePolish = "PL";
+    private const string CodPortuguesePortugal = "PT-PT";
+    private const string CodePortugueseBrazil = "PT-BR";
+    private const string CodePortuguese = "PT";
+    private const string CodeRomanian = "RO";
+    private const string CodeRussian = "RU";
+    private const string CodeSlovak = "SK";
+    private const string CodeSlovenian = "SL";
+    private const string CodeSwedish = "SV";
+    private const string CodeChinese = "ZH";
 
-    public static Language Bulgarian = new(ApiCodeBulgarian);
-    public static Language Czech = new(ApiCodeCzech);
-    public static Language Danish = new(ApiCodeDanish);
-    public static Language German = new(ApiCodeGerman);
-    public static Language Greek = new(ApiCodeGreek);
-    public static Language EnglishBritish = new(ApiCodeEnglishBritish);
-    public static Language EnglishAmerican = new(ApiCodeEnglishAmerican);
+    public static readonly Language Bulgarian = new(CodeBulgarian);
+    public static readonly Language Czech = new(CodeCzech);
+    public static readonly Language Danish = new(CodeDanish);
+    public static readonly Language German = new(CodeGerman);
+    public static readonly Language Greek = new(CodeGreek);
+    public static readonly Language EnglishBritish = new(CodeEnglishBritish);
+    public static readonly Language EnglishAmerican = new(CodeEnglishAmerican);
     /**
      * (unspecified variant for backward compatibility; please select EN-GB or EN-US instead)
      */
-    public static Language English = new(ApiCodeEnglish);
-    public static Language Spanish = new(ApiCodeSpanish);
-    public static Language Estonian = new(ApiCodeEstonian);
-    public static Language Finnish = new(ApiCodeFinnish);
-    public static Language French = new(ApiCodeFrench);
-    public static Language Hungarian = new(ApiCodHungarian);
-    public static Language Italian = new(ApiCodeItalian);
-    public static Language Japanese = new(ApiCodeJapanese);
-    public static Language Lithuanian = new(ApiCodeLithuanian);
-    public static Language Latvian = new(ApiCodeLatvian);
-    public static Language Dutch = new(ApiCodeDutch);
-    public static Language Polish = new(ApiCodePolish);
-    public static Language PortuguesePortugal = new(ApiCodPortuguesePortugal);
-    public static Language PortugueseBrazil = new(ApiCodePortugueseBrazil);
+    public static readonly Language English = new(CodeEnglish);
+    public static readonly Language Spanish = new(CodeSpanish);
+    public static readonly Language Estonian = new(CodeEstonian);
+    public static readonly Language Finnish = new(CodeFinnish);
+    public static readonly Language French = new(CodeFrench);
+    public static readonly Language Hungarian = new(CodHungarian);
+    public static readonly Language Italian = new(CodeItalian);
+    public static readonly Language Japanese = new(CodeJapanese);
+    public static readonly Language Lithuanian = new(CodeLithuanian);
+    public static readonly Language Latvian = new(CodeLatvian);
+    public static readonly Language Dutch = new(CodeDutch);
+    public static readonly Language Polish = new(CodePolish);
+    public static readonly Language PortuguesePortugal = new(CodPortuguesePortugal);
+    public static readonly Language PortugueseBrazil = new(CodePortugueseBrazil);
     /**
      * Portuguese (unspecified variant for backward compatibility; please select PT-PT or PT-BR instead)
      */
-    public static Language Portuguese = new(ApiCodePortuguese);
-    public static Language Romanian = new(ApiCodeRomanian);
-    public static Language Russian = new(ApiCodeRussian);
-    public static Language Slovak = new(ApiCodeSlovak);
-    public static Language Slovenian = new(ApiCodeSlovenian);
-    public static Language Swedish = new(ApiCodeSwedish);
-    public static Language Chinese = new(ApiCodeChinese);
-#pragma warning restore CA2211
+    public static readonly Language Portuguese = new(CodePortuguese);
+    public static readonly Language Romanian = new(CodeRomanian);
+    public static readonly Language Russian = new(CodeRussian);
+    public static readonly Language Slovak = new(CodeSlovak);
+    public static readonly Language Slovenian = new(CodeSlovenian);
+    public static readonly Language Swedish = new(CodeSwedish);
+    public static readonly Language Chinese = new(CodeChinese);
 
     private readonly string _language;
 

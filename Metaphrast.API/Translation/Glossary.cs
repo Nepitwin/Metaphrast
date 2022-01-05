@@ -1,4 +1,4 @@
-﻿using Metaphrast.DeepL;
+﻿using Metaphrast.DeepL.Parameters;
 
 namespace Metaphrast.Translation;
 internal class Glossary

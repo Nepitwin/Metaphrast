@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 
 namespace Metaphrast.IO;
-internal class Json<T>
+internal static class Json<T>
 {
     public static T Load(string path)
     {

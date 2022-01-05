@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Metaphrast.DeepL;
+using Metaphrast.DeepL.Parameters;
 using Metaphrast.Translation;
 using Xunit;
 

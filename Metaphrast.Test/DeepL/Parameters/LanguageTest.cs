@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Metaphrast.DeepL;
+using Metaphrast.DeepL.Parameters;
 using Xunit;
 
 namespace Metaphrast.Test.DeepL.Parameters;

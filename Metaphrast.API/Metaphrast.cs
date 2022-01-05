@@ -1,17 +1,17 @@
-﻿using Metaphrast.Console.Config;
+﻿using Metaphrast.DeepL;
 using Metaphrast.IO;
 using Metaphrast.Translation;
 
 namespace Metaphrast;
 public class Metaphrast
 {
-    private readonly Config _config;
+    private readonly Config.Config _config;
     private readonly List<TranslationBook> _books = new();
     private readonly Api _api;
 
     public Metaphrast(string configFile)
     {
-        _config = Json<Config>.Load(configFile);
+        _config = Json<Config.Config>.Load(configFile);
         var sourceGlossary = Json<Glossary>.Load(_config.SourceTranslationFile);
 
         var filename = Path.GetFileNameWithoutExtension(_config.SourceTranslationFile);
@@ -25,7 +25,7 @@ public class Metaphrast
             _books.Add(new TranslationBook(sourceGlossary, targetGlossary, hashDictionary));
         }
 
-        _api = new Api(_config.ApiKey, true);
+        _api = new Api(_config.Key, true);
     }
 
     public void Translate()
