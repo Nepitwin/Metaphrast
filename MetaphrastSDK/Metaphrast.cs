@@ -1,4 +1,5 @@
-﻿using MetaphrastSDK.DeepL;
+﻿using System.Xml.Linq;
+using MetaphrastSDK.DeepL;
 using MetaphrastSDK.IO;
 using MetaphrastSDK.Translation;
 
@@ -17,11 +18,12 @@ public class Metaphrast
         var filename = Path.GetFileNameWithoutExtension(_config.SourceTranslationFile);
         foreach (var translationLanguage in _config.TranslationLanguages)
         {
-            // ToDo Redesign
-            var targetGlossaryFile = filename + "_" + translationLanguage + ".json";
-            var hashGlossaryFile = filename + "_hash_" + translationLanguage + ".json";
+            var targetGlossaryFile = TranslationJsonFile(filename, translationLanguage);
             var targetGlossary = File.Exists(targetGlossaryFile) ? Json<Glossary>.Load(targetGlossaryFile) : new Glossary(translationLanguage);
+
+            var hashGlossaryFile = TranslationHashJsonFile(filename, translationLanguage);
             var hashDictionary = File.Exists(hashGlossaryFile) ? Json<Dictionary<string, string>>.Load(hashGlossaryFile) : new Dictionary<string, string>();
+
             _books.Add(new TranslationBook(sourceGlossary, targetGlossary, hashDictionary));
         }
 
@@ -38,11 +40,24 @@ public class Metaphrast
         var filename = Path.GetFileNameWithoutExtension(_config.SourceTranslationFile);
         foreach (var book in _books)
         {
-            // ToDo Redesign
-            var targetGlossaryFile = filename + "_" + book.TargetGlossary.Language.ToLower() + ".json";
-            var hashGlossaryFile = filename + "_hash_" + book.TargetGlossary.Language.ToLower() + ".json";
-            Json<Dictionary<string, string>>.Save(book.Hashes, hashGlossaryFile);
-            Json<Glossary>.Save(book.TargetGlossary, targetGlossaryFile);
+            Save(book.Hashes, TranslationHashJsonFile(filename, book.TargetGlossary.Language.ToLower()));
+            Save(book.TargetGlossary, TranslationJsonFile(filename, book.TargetGlossary.Language.ToLower()));
         }
     }
+
+    private static void Save<T>(T values, string file)
+    {
+        Json<T>.Save(values, file);
+    }
+
+    private static string TranslationJsonFile(string filename, string translationLanguage)
+    {
+        return filename + "_" + translationLanguage + ".json";
+    }
+
+    private static string TranslationHashJsonFile(string filename, string translationLanguage)
+    {
+        return filename + "_hash_" + translationLanguage + ".json";
+    }
+
 }
