@@ -1,12 +1,12 @@
 ﻿using Flurl;
 using Flurl.Http;
-using Metaphrast.DeepL.Parameters;
-using Metaphrast.DeepL.Response;
-using Metaphrast.Translation;
-using Metaphrast.Util;
+using MetaphrastSDK.DeepL.Parameters;
+using MetaphrastSDK.DeepL.Response;
+using MetaphrastSDK.Translation;
+using MetaphrastSDK.Util;
 using Newtonsoft.Json;
 
-namespace Metaphrast.DeepL;
+namespace MetaphrastSDK.DeepL;
 
 /**
  * DeepL API implementation by text translations

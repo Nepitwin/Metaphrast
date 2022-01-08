@@ -1,4 +1,4 @@
-﻿namespace Metaphrast.Util;
+﻿namespace MetaphrastSDK.Util;
 internal static class ListHelper
 {
     public static List<List<T>> Split<T>(List<T> locations, int nSize)

@@ -1,6 +1,6 @@
-﻿using Metaphrast.Crypto;
+﻿using MetaphrastSDK.Crypto;
 
-namespace Metaphrast.Translation;
+namespace MetaphrastSDK.Translation;
 internal class TranslationBook
 {
     public Glossary SourceGlossary { get; }

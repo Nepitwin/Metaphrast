@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Nodes;
 using Newtonsoft.Json;
 
-namespace Metaphrast.IO;
+namespace MetaphrastSDK.IO;
 internal static class Json<T>
 {
     public static T Load(string path)

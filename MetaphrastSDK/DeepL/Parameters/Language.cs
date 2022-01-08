@@ -1,4 +1,4 @@
-﻿namespace Metaphrast.DeepL.Parameters;
+﻿namespace MetaphrastSDK.DeepL.Parameters;
 
 /**
  * DeepL argument implementation by specific text translations from source_lang or target_lang.

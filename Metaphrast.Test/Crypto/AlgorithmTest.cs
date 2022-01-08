@@ -1,4 +1,4 @@
-﻿using Metaphrast.Crypto;
+﻿using MetaphrastSDK.Crypto;
 using Xunit;
 
 namespace Metaphrast.Test.Crypto;

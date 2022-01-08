@@ -1,6 +1,8 @@
-﻿try
+﻿using MetaphrastSDK;
+
+try
 {
-    var metaphrast = new Metaphrast.Metaphrast("config.json");
+    var metaphrast = new Metaphrast("config.json");
     Console.WriteLine("Start Translate Files");
     metaphrast.Translate();
     Console.WriteLine("Translate Files Complete");

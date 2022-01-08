@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Metaphrast.Crypto;
+namespace MetaphrastSDK.Crypto;
 
 internal static class Algorithm
 {

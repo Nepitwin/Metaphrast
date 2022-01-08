@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Metaphrast.API\Metaphrast.csproj" />
+    <ProjectReference Include="..\MetaphrastSDK\MetaphrastSDK.csproj" />
   </ItemGroup>
 
 </Project>

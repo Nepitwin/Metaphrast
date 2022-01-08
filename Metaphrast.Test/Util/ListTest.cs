@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Metaphrast.Util;
+using MetaphrastSDK.Util;
 using Xunit;
 
 namespace Metaphrast.Test.Util;
