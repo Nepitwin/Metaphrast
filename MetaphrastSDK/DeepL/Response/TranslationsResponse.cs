@@ -4,8 +4,7 @@ namespace MetaphrastSDK.DeepL.Response;
 
 /**
  * JSON DeepL response from translation API.
- *
- * Input ["Netherlands", "Hello World"]
+ * https://www.deepl.com/de/docs-api/translating-text/ 
  *
  * Multiple german translation response example:
  * {

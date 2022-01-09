@@ -1,5 +1,4 @@
-﻿using System.Xml.Linq;
-using MetaphrastSDK.DeepL;
+﻿using MetaphrastSDK.DeepL;
 using MetaphrastSDK.IO;
 using MetaphrastSDK.Translation;
 
@@ -43,6 +42,11 @@ public class Metaphrast
             Save(book.Hashes, TranslationHashJsonFile(filename, book.TargetGlossary.Language.ToLower()));
             Save(book.TargetGlossary, TranslationJsonFile(filename, book.TargetGlossary.Language.ToLower()));
         }
+    }
+
+    public Tuple<long, long> GetUsage()
+    {
+        return new Tuple<long,long>(_api.Usage.CharacterCount, _api.Usage.CharacterLimit);
     }
 
     private static void Save<T>(T values, string file)

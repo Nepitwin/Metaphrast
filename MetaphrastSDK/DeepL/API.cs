@@ -2,9 +2,9 @@
 using Flurl.Http;
 using MetaphrastSDK.DeepL.Parameters;
 using MetaphrastSDK.DeepL.Response;
+using MetaphrastSDK.Error;
 using MetaphrastSDK.Translation;
 using MetaphrastSDK.Util;
-using Newtonsoft.Json;
 
 namespace MetaphrastSDK.DeepL;
 
@@ -18,10 +18,30 @@ internal class Api
     private readonly string _apiUrl;
     private const int MaximumTextsInRequest = 50;
 
+    public UsageResponse Usage { get; private set; }
+
     public Api(string apiKey, bool isFreeAccount)
     {
         _apiKey = apiKey;
-        _apiUrl = isFreeAccount ? "https://api-free.deepl.com/v2/translate" : "https://api.deepl.com/v2/translate";
+        _apiUrl = isFreeAccount ? "https://api-free.deepl.com/v2" : "https://api.deepl.com/v2";
+        GetApiUsage();
+    }
+
+    public void GetApiUsage()
+    {
+        try
+        {
+            Usage = SendUsageRequest();
+        }
+        catch (FlurlHttpException ex)
+        {
+            if (ex.StatusCode == 403)
+            {
+                throw new MetaphrastException(MetaphrastExceptionType.INVALID_API_KEY, "Invalid Deepl-API-Key usage");
+            }
+
+            throw new MetaphrastException(MetaphrastExceptionType.UNKNOWN_ERROR, ex.Message);
+        }
     }
 
     public void Translate(List<TranslationBook> translationBooks)
@@ -40,8 +60,7 @@ internal class Api
 
             foreach (var list in splitValuesList)
             {
-                var resultHttpRequest = SendHttpRequest(book.SourceGlossary.Language, book.TargetGlossary.Language, list);
-                var translationResponse = JsonConvert.DeserializeObject<TranslationsResponse>(resultHttpRequest.Result);
+                var translationResponse = SendTranslationRequest(book.SourceGlossary.Language, book.TargetGlossary.Language, list);
                 translationsResults.Add(translationResponse?.Translations);
             }
 
@@ -57,11 +76,20 @@ internal class Api
             }
         }
     }
-    
-    private Task<string> SendHttpRequest(Language sourceLanguage, Language targetLanguage, List<string> translationTexts)
+
+    private UsageResponse SendUsageRequest()
     {
-        return _apiUrl.SetQueryParam("text", translationTexts)
+        // ToDo Async/Await Usage
+        var usageUrl = _apiUrl + "/usage";
+        return usageUrl.SetQueryParam("auth_key", _apiKey).GetJsonAsync<UsageResponse>().GetAwaiter().GetResult();
+    }
+    
+    private TranslationsResponse SendTranslationRequest(Language sourceLanguage, Language targetLanguage, List<string> translationTexts)
+    {
+        // ToDo Async/Await Usage
+        var translationUrl = _apiUrl + "/translate";
+        return translationUrl.SetQueryParam("text", translationTexts)
             .PostUrlEncodedAsync(new { target_lang = targetLanguage, source_lang = sourceLanguage, auth_key = _apiKey })
-            .ReceiveString();
+            .ReceiveJson<TranslationsResponse>().GetAwaiter().GetResult();
     }
 }
