@@ -32,7 +32,7 @@ public class TranslationBookTest
         }
 
         var translationBook = new TranslationBook(glossary, translationGlossary, translationDictionary);
-        var actualTranslations = translationBook.GetTranslations();
+        var actualTranslations = translationBook.GetModifiedTranslations();
         foreach (var translation in expectedTranslations)
         {
             Assert.Equal(actualTranslations[translation.Key], translation.Value);
@@ -49,8 +49,8 @@ public class TranslationBookTest
         var translationBook = new TranslationBook(sourceGlossary, translationGlossary, new Dictionary<string, string>());
 
         translationBook.SetTranslation("Netherland", "Niederlande");
-        Assert.True(translationBook.Hashes.ContainsKey("Netherland"));
-        Assert.Equal("00f181027313ba02cc0e237709f664674842306c21404263fd71ffab49d00d18", translationBook.Hashes["Netherland"]);
+        Assert.True(translationBook.ExistTranslationHash("Netherland"));
+        Assert.Equal("00f181027313ba02cc0e237709f664674842306c21404263fd71ffab49d00d18", translationBook.GetTranslationHash("Netherland"));
     }
 
     [Fact]

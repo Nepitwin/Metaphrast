@@ -39,19 +39,15 @@ public class Metaphrast
         var filename = Path.GetFileNameWithoutExtension(_config.SourceTranslationFile);
         foreach (var book in _books)
         {
-            Save(book.Hashes, TranslationHashJsonFile(filename, book.TargetGlossary.Language.ToLower()));
-            Save(book.TargetGlossary, TranslationJsonFile(filename, book.TargetGlossary.Language.ToLower()));
+            var targetLanguage = book.GetTranslationLanguage().ToString().ToLower();
+            book.SaveHashesToFile(TranslationHashJsonFile(filename, targetLanguage));
+            book.SaveTranslationsToFile(TranslationJsonFile(filename, targetLanguage));
         }
     }
 
     public Tuple<long, long> GetUsage()
     {
         return new Tuple<long,long>(_api.Usage.CharacterCount, _api.Usage.CharacterLimit);
-    }
-
-    private static void Save<T>(T values, string file)
-    {
-        Json<T>.Save(values, file);
     }
 
     private static string TranslationJsonFile(string filename, string translationLanguage)

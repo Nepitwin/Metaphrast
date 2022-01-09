@@ -48,7 +48,7 @@ internal class Api
     {
         foreach (var book in translationBooks)
         {
-            var translationDict = book.GetTranslations();
+            var translationDict = book.GetModifiedTranslations();
             if (translationDict.Count <= 0)
             {
                 continue;
@@ -60,7 +60,7 @@ internal class Api
 
             foreach (var list in splitValuesList)
             {
-                var translationResponse = SendTranslationRequest(book.SourceGlossary.Language, book.TargetGlossary.Language, list);
+                var translationResponse = SendTranslationRequest(book.GetSourceLanguage(), book.GetTranslationLanguage(), list);
                 translationsResults.Add(translationResponse?.Translations);
             }
 

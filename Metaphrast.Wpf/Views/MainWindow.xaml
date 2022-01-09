@@ -10,33 +10,33 @@
                  Title="{Binding Title}" ResizeMode="CanMinimize" Height="700" Width="1050" 
                  d:DataContext="{d:DesignInstance Type=viewModels:MainWindowViewModel}">
     <Grid VerticalAlignment="Top">
-        <ScrollViewer>
-            <StackPanel Margin="20px">
-                <Button Margin="0, 0, 0, 10px">Load Translation</Button>
+        <StackPanel Margin="20px">
+            <Button Margin="0, 0, 0, 10px">Load Configuration</Button>
 
-                <StackPanel Margin="0, 0, 0, 10px">
-                    <TextBlock FontSize="16">DeepL-Token</TextBlock>
-                    <TextBlock FontSize="16">Translation-Source</TextBlock>
-                </StackPanel>
-
-                <DataGrid Margin="0, 0, 0, 10px"
-                          ItemsSource="{Binding Data.DefaultView}" 
-                          AutoGenerateColumns="True"
-                          CanUserResizeColumns="False"
-                          CanUserResizeRows="False"
-                          SelectionMode="Single"
-                          SelectionUnit="Cell"
-                          BorderThickness="1"
-                          ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                          Height="470px"
-                          FontSize="16"/>
-
-                <StackPanel Margin="0, 0, 0, 10px">
-                    <Button Margin="0, 0, 0, 10px">Translate</Button>
-                    <Button Margin="0, 0, 0, 10px">Save</Button>
-                </StackPanel>
-
+            <StackPanel Margin="0, 0, 0, 10px">
+                <TextBlock FontSize="16">DeepL-Token</TextBlock>
+                <TextBlock FontSize="16">DeepL-Consumed-Characters</TextBlock>
+                <TextBlock FontSize="16">DeepL-Available-Characters</TextBlock>
+                <TextBlock FontSize="16">Translation-Source</TextBlock>
             </StackPanel>
-        </ScrollViewer>
+
+            <DataGrid Margin="0, 0, 0, 10px"
+                      ItemsSource="{Binding Data.DefaultView}" 
+                      AutoGenerateColumns="True"
+                      CanUserResizeColumns="False"
+                      CanUserResizeRows="False"
+                      SelectionMode="Single"
+                      SelectionUnit="Cell"
+                      BorderThickness="1"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      Height="420px"
+                      FontSize="16"/>
+
+            <StackPanel Margin="0, 0, 0, 10px">
+                <Button Margin="0, 0, 0, 10px">Translate</Button>
+                <Button Margin="0, 0, 0, 10px">Save</Button>
+            </StackPanel>
+
+        </StackPanel>
     </Grid>
 </mah:MetroWindow>
