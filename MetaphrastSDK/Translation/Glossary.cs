@@ -1,6 +1,6 @@
-﻿using MetaphrastSDK.DeepL.Parameters;
+﻿using Metaphrast.Sdk.DeepL.Parameters;
 
-namespace MetaphrastSDK.Translation;
+namespace Metaphrast.Sdk.Translation;
 internal class Glossary
 {
     public string Language { get; }

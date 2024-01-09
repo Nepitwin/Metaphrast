@@ -9,7 +9,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Metaphrast.Test", "Metaphra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Metaphrast.Wpf", "Metaphrast.Wpf\Metaphrast.Wpf.csproj", "{DB84029E-4E7A-435D-96F3-287BC55007FE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetaphrastSDK", "MetaphrastSDK\MetaphrastSDK.csproj", "{3B0F8DEB-3913-4340-82EC-0B0FF47D8131}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Metaphrast.Sdk", "MetaphrastSDK\Metaphrast.Sdk.csproj", "{3B0F8DEB-3913-4340-82EC-0B0FF47D8131}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Metaphrast.Sdk.Domain", "src\Metaphrast.Sdk.Domain\Metaphrast.Sdk.Domain.csproj", "{8F6A68F6-E74C-40C1-91CE-CF96127A70E7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{2A15C768-C646-4E0B-B012-9ABD41E93D3F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Metaphrast.Sdk.Domain.Test", "test\Metaphrast.Sdk.Domain.Test\Metaphrast.Sdk.Domain.Test.csproj", "{29EBFDA1-2088-4644-B3B4-AD444CC7FC92}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{037446AD-384F-4913-B8C8-0504F7805C08}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{5E0ED320-EB84-40C2-832F-9A5DA7B5C18F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{5593298C-5F47-4A61-BAF3-28A4671E26EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metaphrast.Sdk.Application", "src\Metaphrast.Sdk.Application\Metaphrast.Sdk.Application.csproj", "{65B7030A-91FA-4CB6-A09C-BE5C4B507F34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metaphrast.Sdk.Application.Test", "test\Metaphrast.Sdk.Application.Test\Metaphrast.Sdk.Application.Test.csproj", "{4511B1DD-7702-4213-9AFE-65A6B71C862A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +49,33 @@ Global
 		{3B0F8DEB-3913-4340-82EC-0B0FF47D8131}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B0F8DEB-3913-4340-82EC-0B0FF47D8131}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B0F8DEB-3913-4340-82EC-0B0FF47D8131}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F6A68F6-E74C-40C1-91CE-CF96127A70E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F6A68F6-E74C-40C1-91CE-CF96127A70E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F6A68F6-E74C-40C1-91CE-CF96127A70E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F6A68F6-E74C-40C1-91CE-CF96127A70E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29EBFDA1-2088-4644-B3B4-AD444CC7FC92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29EBFDA1-2088-4644-B3B4-AD444CC7FC92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29EBFDA1-2088-4644-B3B4-AD444CC7FC92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29EBFDA1-2088-4644-B3B4-AD444CC7FC92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65B7030A-91FA-4CB6-A09C-BE5C4B507F34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65B7030A-91FA-4CB6-A09C-BE5C4B507F34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65B7030A-91FA-4CB6-A09C-BE5C4B507F34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65B7030A-91FA-4CB6-A09C-BE5C4B507F34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4511B1DD-7702-4213-9AFE-65A6B71C862A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4511B1DD-7702-4213-9AFE-65A6B71C862A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4511B1DD-7702-4213-9AFE-65A6B71C862A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4511B1DD-7702-4213-9AFE-65A6B71C862A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C8C68925-EAEB-44DB-920F-3D6A52715F9D} = {5593298C-5F47-4A61-BAF3-28A4671E26EE}
+		{DB84029E-4E7A-435D-96F3-287BC55007FE} = {5593298C-5F47-4A61-BAF3-28A4671E26EE}
+		{8F6A68F6-E74C-40C1-91CE-CF96127A70E7} = {2A15C768-C646-4E0B-B012-9ABD41E93D3F}
+		{29EBFDA1-2088-4644-B3B4-AD444CC7FC92} = {2A15C768-C646-4E0B-B012-9ABD41E93D3F}
+		{65B7030A-91FA-4CB6-A09C-BE5C4B507F34} = {037446AD-384F-4913-B8C8-0504F7805C08}
+		{4511B1DD-7702-4213-9AFE-65A6B71C862A} = {037446AD-384F-4913-B8C8-0504F7805C08}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11BC5331-6DC5-457A-90CF-A1484CE44BB3}

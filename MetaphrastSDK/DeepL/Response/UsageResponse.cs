@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace MetaphrastSDK.DeepL.Response;
+namespace Metaphrast.Sdk.DeepL.Response;
 
 /**
 * JSON DeepL response from usage API.

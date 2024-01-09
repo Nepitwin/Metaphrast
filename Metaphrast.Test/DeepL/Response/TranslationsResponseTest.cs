@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using MetaphrastSDK.DeepL.Response;
+using Metaphrast.Sdk.DeepL.Response;
 using Newtonsoft.Json;
 using Xunit;
 

@@ -1,8 +1,8 @@
-﻿using MetaphrastSDK.Crypto;
-using MetaphrastSDK.DeepL.Parameters;
-using MetaphrastSDK.IO;
+﻿using Metaphrast.Sdk.Crypto;
+using Metaphrast.Sdk.DeepL.Parameters;
+using Metaphrast.Sdk.IO;
 
-namespace MetaphrastSDK.Translation;
+namespace Metaphrast.Sdk.Translation;
 internal class TranslationBook
 {
     private readonly Glossary _sourceGlossary;
@@ -21,18 +21,18 @@ internal class TranslationBook
     {
         var list = new Dictionary<string, string>();
 
-        foreach (var (key, value) in _sourceGlossary.Texts)
+        foreach (var text in _sourceGlossary.Texts)
         {
-            if (_targetGlossary.Texts.ContainsKey(key))
+            if (_targetGlossary.Texts.ContainsKey(text.Key))
             {
-                if (!_hashes.ContainsKey(key) || IsHashModified(value, _targetGlossary.Texts[key], key))
+                if (!_hashes.ContainsKey(text.Key) || IsHashModified(text.Value, _targetGlossary.Texts[text.Key], text.Key))
                 {
-                    list[key] = value;
+                    list[text.Key] = text.Value;
                 }
             }
             else
             {
-                list[key] = value;
+                list[text.Key] = text.Value;
             }
         }
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using MetaphrastSDK.DeepL.Parameters;
-using MetaphrastSDK.Translation;
+using Metaphrast.Sdk.DeepL.Parameters;
+using Metaphrast.Sdk.Translation;
 using Xunit;
 
 namespace Metaphrast.Test.Translation;

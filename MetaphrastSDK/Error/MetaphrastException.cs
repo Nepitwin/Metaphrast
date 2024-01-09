@@ -1,4 +1,5 @@
-﻿namespace MetaphrastSDK.Error;
+﻿// ReSharper disable once CheckNamespace
+namespace Metaphrast.Sdk.Error;
 
 public enum MetaphrastExceptionType
 {

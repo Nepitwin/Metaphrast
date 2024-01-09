@@ -1,9 +1,8 @@
-﻿using MetaphrastSDK;
-using MetaphrastSDK.Error;
+﻿using Metaphrast.Sdk.Error;
 
 try
 {
-    var metaphrast = new Metaphrast("config.json");
+    var metaphrast = new Metaphrast.Sdk.Metaphrast("config.json");
     Console.WriteLine("Authentication successfully");
     var usage = metaphrast.GetUsage();
     Console.WriteLine("Consumed characters : " + usage.Item1);

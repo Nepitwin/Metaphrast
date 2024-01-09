@@ -1,8 +1,8 @@
-﻿using MetaphrastSDK.DeepL;
-using MetaphrastSDK.IO;
-using MetaphrastSDK.Translation;
+﻿using Metaphrast.Sdk.DeepL;
+using Metaphrast.Sdk.IO;
+using Metaphrast.Sdk.Translation;
 
-namespace MetaphrastSDK;
+namespace Metaphrast.Sdk;
 public class Metaphrast
 {
     private readonly Config.Config _config;

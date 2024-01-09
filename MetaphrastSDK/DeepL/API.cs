@@ -1,12 +1,12 @@
 ﻿using Flurl;
 using Flurl.Http;
-using MetaphrastSDK.DeepL.Parameters;
-using MetaphrastSDK.DeepL.Response;
-using MetaphrastSDK.Error;
-using MetaphrastSDK.Translation;
-using MetaphrastSDK.Util;
+using Metaphrast.Sdk.DeepL.Parameters;
+using Metaphrast.Sdk.DeepL.Response;
+using Metaphrast.Sdk.Error;
+using Metaphrast.Sdk.Translation;
+using Metaphrast.Sdk.Util;
 
-namespace MetaphrastSDK.DeepL;
+namespace Metaphrast.Sdk.DeepL;
 
 /**
  * DeepL API implementation by text translations
@@ -18,33 +18,16 @@ internal class Api
     private readonly string _apiUrl;
     private const int MaximumTextsInRequest = 50;
 
-    public UsageResponse Usage { get; private set; }
+    public UsageResponse Usage { get; }
 
     public Api(string apiKey, bool isFreeAccount)
     {
         _apiKey = apiKey;
         _apiUrl = isFreeAccount ? "https://api-free.deepl.com/v2" : "https://api.deepl.com/v2";
-        GetApiUsage();
+        Usage = GetApiUsage().Result;
     }
 
-    public void GetApiUsage()
-    {
-        try
-        {
-            Usage = SendUsageRequest();
-        }
-        catch (FlurlHttpException ex)
-        {
-            if (ex.StatusCode == 403)
-            {
-                throw new MetaphrastException(MetaphrastExceptionType.INVALID_API_KEY, "Invalid Deepl-API-Key usage");
-            }
-
-            throw new MetaphrastException(MetaphrastExceptionType.UNKNOWN_ERROR, ex.Message);
-        }
-    }
-
-    public void Translate(List<TranslationBook> translationBooks)
+    public async void Translate(List<TranslationBook> translationBooks)
     {
         foreach (var book in translationBooks)
         {
@@ -60,8 +43,8 @@ internal class Api
 
             foreach (var list in splitValuesList)
             {
-                var translationResponse = SendTranslationRequest(book.GetSourceLanguage(), book.GetTranslationLanguage(), list);
-                translationsResults.Add(translationResponse?.Translations);
+                var translationResponse = await SendTranslationRequestAsync(book.GetSourceLanguage(), book.GetTranslationLanguage(), list);
+                translationsResults.Add(translationResponse.Translations);
             }
 
             var z = 0;
@@ -77,19 +60,27 @@ internal class Api
         }
     }
 
-    private UsageResponse SendUsageRequest()
+    private Task<UsageResponse> GetApiUsage()
     {
-        // ToDo Async/Await Usage
-        var usageUrl = _apiUrl + "/usage";
-        return usageUrl.SetQueryParam("auth_key", _apiKey).GetJsonAsync<UsageResponse>().GetAwaiter().GetResult();
+        try
+        {
+            return $"{_apiUrl}/usage".SetQueryParam("auth_key", _apiKey).GetJsonAsync<UsageResponse>();
+        }
+        catch (FlurlHttpException ex)
+        {
+            if (ex.StatusCode == 403)
+            {
+                throw new MetaphrastException(MetaphrastExceptionType.INVALID_API_KEY, "Invalid Deepl-API-Key usage");
+            }
+
+            throw new MetaphrastException(MetaphrastExceptionType.UNKNOWN_ERROR, ex.Message);
+        }
     }
     
-    private TranslationsResponse SendTranslationRequest(Language sourceLanguage, Language targetLanguage, List<string> translationTexts)
+    private Task<TranslationsResponse> SendTranslationRequestAsync(Language sourceLanguage, Language targetLanguage, List<string> translationTexts)
     {
-        // ToDo Async/Await Usage
-        var translationUrl = _apiUrl + "/translate";
-        return translationUrl.SetQueryParam("text", translationTexts)
+        return $"{_apiUrl}/translate".SetQueryParam("text", translationTexts)
             .PostUrlEncodedAsync(new { target_lang = targetLanguage, source_lang = sourceLanguage, auth_key = _apiKey })
-            .ReceiveJson<TranslationsResponse>().GetAwaiter().GetResult();
+            .ReceiveJson<TranslationsResponse>();
     }
 }

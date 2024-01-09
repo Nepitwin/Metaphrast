@@ -1,7 +1,7 @@
-﻿using MetaphrastSDK.DeepL.Parameters;
+﻿using Metaphrast.Sdk.DeepL.Parameters;
 using Newtonsoft.Json;
 
-namespace MetaphrastSDK.Config;
+namespace Metaphrast.Sdk.Config;
 internal class Config
 {
     [JsonProperty(PropertyName = "api_key")]
